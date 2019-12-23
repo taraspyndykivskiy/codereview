@@ -4,14 +4,13 @@
 хоча б одну букву у верхньому регістрі.
 """
 
-text=str(input("Введіть речення : "))
-words=text.split()
-big_words=[None]*len(words)
-i=0
+words=str(input("Введіть речення : ")).split()
+big_words=list()
+
 for word in words:
     for letter in word:
-        if letter.isupper()==True:
-            big_words[i]=str(word)
-            i+=1
+        if letter.isupper():
+            big_words.append(word)
             break
+            
 print(big_words)
