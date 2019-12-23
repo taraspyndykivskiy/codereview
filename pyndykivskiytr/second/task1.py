@@ -9,23 +9,22 @@
 
 import re
 
-pattern=re.compile(r"\d{1,2}-\d{1,2}-\d{4}")
-
-def validator(enter, pattern):
-    data=date_validator(enter, pattern)
-    return data
+pattern=re.compile(r"^\d{1,2}-\d{1,2}-\d{1,4}$")
 
 def date_validator(enter, pattern):
     date=input(enter)
-    while not bool(pattern.findall(date)[0]):
+    while not pattern.match(date):
         date = input(enter)
     return date
 
-real_date=str(validator("enter the date format ", pattern))
-real_date=(real_date.split("-"))
+real_date=date_validator("enter the date format ", pattern).split("-")
+while(int(real_date[0])>31 or int(real_date[1])>12 or int(real_date[1])==0 or int(real_date[0])==0):
+    real_date=date_validator("enter the date format ", pattern).split("-")
+
 numeric_format=[int(j) for j in real_date]
 
 high_year=False
+
 if numeric_format[2]%4==0:
     high_year=True
 
@@ -48,4 +47,4 @@ day_week=date_number%7
 
 days_of_week=["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
-print("your day of the week is "+str(days_of_week[day_week]))
+print("your day of the week is "+days_of_week[day_week])
